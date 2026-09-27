@@ -15,27 +15,13 @@ You install both. Day to day you type `knowla`.
 
 ## Install
 
-Pick the tarball for your OS and CPU from [Releases](https://github.com/ethyaan/knowla-cli/releases/latest).
-
-| File | Who |
-| --- | --- |
-| `knowla-0.1.0-linux-amd64.tgz` | Linux x86_64 |
-| `knowla-0.1.0-linux-arm64.tgz` | Linux ARM64 |
-| `knowla-0.1.0-darwin-arm64.tgz` | Apple Silicon |
-| `knowla-0.1.0-darwin-amd64.tgz` | Intel Mac |
-
 ```bash
-VERSION=0.1.0
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m)
-case "$ARCH" in x86_64) ARCH=amd64 ;; aarch64|arm64) ARCH=arm64 ;; esac
-
-curl -sL "https://github.com/ethyaan/knowla-cli/releases/latest/download/knowla-${VERSION}-${OS}-${ARCH}.tgz" -o knowla.tgz
-tar -xzf knowla.tgz
-sudo cp knowla-${VERSION}-${OS}-${ARCH}/knowla knowla-${VERSION}-${OS}-${ARCH}/knowlad /usr/local/bin/
+curl -fsSL https://raw.githubusercontent.com/ethyaan/knowla-cli/main/install.sh | sh
 ```
 
-No extra libraries. Ubuntu, Debian, Fedora, Arch, and macOS work with the binary alone.
+That script detects Linux vs macOS and Intel vs ARM, downloads the matching tarball from [Releases](https://github.com/ethyaan/knowla-cli/releases/latest), and copies `knowla` + `knowlad` to `/usr/local/bin` (asks for `sudo` if that folder is not writable). No extra libraries.
+
+Read the script first if you prefer not to pipe to `sh`: [install.sh](install.sh). Manual tarball steps are in [docs/linux.md](docs/linux.md) and [docs/darwin.md](docs/darwin.md).
 
 ## First run
 

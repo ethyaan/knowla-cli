@@ -4,17 +4,11 @@ Static `knowla` and `knowlad`. No GUI. No extra libraries.
 
 ## Install
 
-From [Releases](https://github.com/ethyaan/knowla-cli/releases/latest):
-
 ```bash
-VERSION=0.1.0
-ARCH=$(uname -m)
-case "$ARCH" in x86_64) ARCH=amd64 ;; aarch64|arm64) ARCH=arm64 ;; esac
-
-curl -sL "https://github.com/ethyaan/knowla-cli/releases/latest/download/knowla-${VERSION}-linux-${ARCH}.tgz" -o knowla.tgz
-tar -xzf knowla.tgz
-sudo cp knowla-${VERSION}-linux-${ARCH}/knowla knowla-${VERSION}-linux-${ARCH}/knowlad /usr/local/bin/
+curl -fsSL https://raw.githubusercontent.com/ethyaan/knowla-cli/main/install.sh | sh
 ```
+
+Manual tarball: [Releases](https://github.com/ethyaan/knowla-cli/releases/latest), then copy `knowla` and `knowlad` to `/usr/local/bin`.
 
 ## First run
 
