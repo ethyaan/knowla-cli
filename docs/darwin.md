@@ -1,6 +1,6 @@
 # macOS CLI
 
-Same `knowla` / `knowlad` as Linux. No menu bar. The Mac app is a separate download.
+Works on **Apple Silicon** (`darwin-arm64`) and **Intel** (`darwin-amd64`). macOS 14+ is the tested line. No extra libraries.
 
 ## Install
 
@@ -8,13 +8,20 @@ Same `knowla` / `knowlad` as Linux. No menu bar. The Mac app is a separate downl
 curl -fsSL https://raw.githubusercontent.com/ethyaan/knowla-cli/main/install.sh | sh
 ```
 
-The script picks `darwin-arm64` or `darwin-amd64` and clears Gatekeeper quarantine. Manual tarball: [Releases](https://github.com/ethyaan/knowla-cli/releases/latest).
+The script picks the CPU and clears Gatekeeper quarantine.
 
-## First run
+## Login, then daemon
+
+`knowla run` is foreground. Close Terminal and sync stops. Keep `knowlad` running with launchd:
 
 ```bash
 knowla login --api https://sync.knowla.io --token YOUR_TOKEN --folder ~/Vault
-knowla run
+knowla install
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/io.knowla.knowlad.plist
+launchctl enable gui/$(id -u)/io.knowla.knowlad
+knowla status
 ```
 
-`knowla install` does not write launchd. Keep `knowla run` in a terminal, or use your own supervisor.
+## Logs
+
+Default: `~/.config/knowla/logs/error-YYYY-MM-DD.log`. Raise with `--log-level warning` or `debug` on `knowla login`. See the [README](../README.md#logs).

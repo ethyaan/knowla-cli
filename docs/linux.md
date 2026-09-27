@@ -1,6 +1,6 @@
 # Linux
 
-Static `knowla` and `knowlad`. No GUI. No extra libraries.
+Works on Ubuntu, Debian, Fedora, Arch, and other glibc/musl-free static targets: **linux/amd64** and **linux/arm64**. No extra libraries. No GUI.
 
 ## Install
 
@@ -8,27 +8,19 @@ Static `knowla` and `knowlad`. No GUI. No extra libraries.
 curl -fsSL https://raw.githubusercontent.com/ethyaan/knowla-cli/main/install.sh | sh
 ```
 
-Manual tarball: [Releases](https://github.com/ethyaan/knowla-cli/releases/latest), then copy `knowla` and `knowlad` to `/usr/local/bin`.
+## Login, then daemon
 
-## First run
+`knowla run` is foreground. For sync to stay up after you close the terminal:
 
 ```bash
 knowla login --api https://sync.knowla.io --token YOUR_TOKEN --folder ~/Vault
-knowla run
-```
-
-```bash
-knowla status
-knowla stop
-```
-
-## Autostart
-
-```bash
 knowla install
 systemctl --user enable --now knowlad.service
+knowla status
 ```
 
-If systemd is missing, run `knowlad` in a terminal or your own supervisor.
+If systemd is missing, run `knowlad` and keep that process alive.
 
-Docker is not the Linux product.
+## Logs
+
+Default: `~/.config/knowla/logs/error-YYYY-MM-DD.log`. Raise with `--log-level warning` or `debug` on `knowla login`. See the [README](../README.md#logs).
